@@ -5,17 +5,27 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @restaurant = Restaurant.show(params [:id])
+    @restaurant = Restaurant.find(params[:id])
   end
 
   def new
     @restaurant = Restaurant.new
   end
 
+  def edit
+    @restaurant = Restaurant.find(params[:id])
+  end
+
+  def update
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.update(rest_params)
+    redirect_to restaurant_path(@restaurant)
+  end
+
   def create
     @restaurant = Restaurant.new(rest_params)
     @restaurant.save
-    redirect_to restuarant_path(@restaurant)
+    redirect_to restaurant_path(@restaurant)
   end
 
   private
